@@ -1,5 +1,6 @@
 package main;
 
+import main.MAS.ObjectPlus4;
 import main.PunishmentTools.PunishmentTool;
 import main.Torturers.Torturer;
 
@@ -9,16 +10,19 @@ import java.util.*;
 /**
  * Created by tieorange on 21/04/16.
  */
-public class TortureDepartment {
+public class TortureDepartment extends ObjectPlus4 {
+
+    public static final String roleConsistOf = "Consist of";
+    public static final String roleManagedBy = "Managed by";
 
     @NotNull
     private String name;
-
     private Set<SufferingProcess> sufferingProcesses = new HashSet<>(); // with an attribute
     private Map<String, Torturer> torturersMap = new HashMap<>(); // qualified
     private List<PunishmentTool> punishmentTools = new ArrayList<>();
 
     public TortureDepartment(String name) {
+        super();
         setName(name);
     }
 

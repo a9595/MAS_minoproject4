@@ -34,6 +34,43 @@ public class Main {
         HellPet hellPet = new HellPet("bonia", HellPetColor.GREEN, torturerWithSpikes, HellPetType.FLYING, null, 100);
         hellPet.becomeJumping(1000);
 
+//        testSubset_manual();
+        testSubset_auto();
+    }
+
+    public static void testSubset_manual() {
+        TortureDepartment tortureDepartment = new TortureDepartment("boiling room");
+        TorturerWithSpikes torturerWithSpikes = new TorturerWithSpikes("Mifelos", tortureDepartment);
+
+        try {
+            torturerWithSpikes.addLink(Torturer.roleBelongsTo, TortureDepartment.roleConsistOf, tortureDepartment);
+
+            if (torturerWithSpikes.isLink(Torturer.roleBelongsTo, tortureDepartment)) {
+                torturerWithSpikes.addLink(Torturer.roleManages, TortureDepartment.roleManagedBy, tortureDepartment);
+            } else {
+                System.out.println("No super link for the role: " + Torturer.roleBelongsTo);
+            }
+
+
+            torturerWithSpikes.showLinks(System.out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void testSubset_auto() {
+        TortureDepartment department = new TortureDepartment("boiling room");
+        TorturerWithSpikes torturer = new TorturerWithSpikes("Mifelos", department);
+
+        try {
+            torturer.addLink(Torturer.roleBelongsTo, TortureDepartment.roleConsistOf, department);
+
+            torturer.addLink_subset(Torturer.roleManages, TortureDepartment.roleManagedBy, Torturer.roleBelongsTo, department);
+
+            torturer.showLinks(System.out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

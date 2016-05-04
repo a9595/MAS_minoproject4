@@ -1,6 +1,7 @@
 package main.Torturers;
 
 import main.HellPets.HellPet;
+import main.MAS.ObjectPlus4;
 import main.TortureDepartment;
 
 import java.io.*;
@@ -11,7 +12,11 @@ import java.util.UUID;
 /**
  * Created by tieorange on 21/04/16.
  */
-public abstract class Torturer {
+public abstract class Torturer extends ObjectPlus4 {
+
+    public static final String roleBelongsTo = "Belongs to";
+    public static final String roleManages = "Manages";
+
     private static final String EXTENT_FILE_PATH = "/tmp/extent.torturer";
     private static List<Torturer> extent = new ArrayList<>();
     private String id; // Qualified
