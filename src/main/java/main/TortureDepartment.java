@@ -2,6 +2,7 @@ package main;
 
 import main.MAS.ObjectPlus4;
 import main.PunishmentTools.PunishmentTool;
+import main.PunishmentTools.PunishmentToolComparator;
 import main.Torturers.Torturer;
 
 import javax.validation.constraints.NotNull;
@@ -19,7 +20,7 @@ public class TortureDepartment extends ObjectPlus4 {
     private String name;
     private Set<SufferingProcess> sufferingProcesses = new HashSet<>(); // with an attribute
     private Map<String, Torturer> torturersMap = new HashMap<>(); // qualified
-    private List<PunishmentTool> punishmentTools = new ArrayList<>();
+    private Set<PunishmentTool> punishmentTools = new TreeSet<>(new PunishmentToolComparator());
 
     public TortureDepartment(String name) {
         super();
