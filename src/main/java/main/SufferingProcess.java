@@ -1,5 +1,6 @@
 package main;
 
+import main.MyUtils.MyTools;
 import main.Sinners.Sinner;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
  * Created by tieorange on 21/04/16.
  */
 public class SufferingProcess {
+    public static final int MINIMAL_PROCESS_DURATION = 1000;
     private Date startDate;
     private Date finishDate;
     private TortureDepartment tortureDepartment;
@@ -18,7 +20,19 @@ public class SufferingProcess {
         setFinishDate(finishDate);
         setTortureDepartment(tortureDepartment);
         setSinner(sinner);
+
+        if (!ifBurnedLongEnough()) {
+            this.startDate = null;
+            this.finishDate = null;
+            throw new IllegalArgumentException("YOU HAVE TO BE BURNING IN HELL AT LEAST 1000 YEARS BEFORE GOD JUDGES YOU");
+        }
     }
+
+    private boolean ifBurnedLongEnough() {
+        int diffYears = MyTools.getDiffYears(getStartDate(), getFinishDate());
+        return diffYears >= MINIMAL_PROCESS_DURATION;
+    }
+
 
     public Date getStartDate() {
         return startDate;

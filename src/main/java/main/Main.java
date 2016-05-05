@@ -3,6 +3,7 @@ package main;
 import main.HellPets.HellPet;
 import main.HellPets.HellPetColor;
 import main.HellPets.HellPetType;
+import main.MyUtils.MyTools;
 import main.PunishmentTools.ExplosivePunishmentTool;
 import main.Sinners.Sinner;
 import main.Sinners.SinnerType;
@@ -40,6 +41,18 @@ public class Main {
         testSufferingProcess();
 
         testXor();
+
+        testCustomBusinessConstraint();
+    }
+
+    private static void testCustomBusinessConstraint() {
+        TortureDepartment tortureDepartment = new TortureDepartment("boiling room");
+        EnumSet<SinnerType> sinnerTypes = EnumSet.of(SinnerType.LIAR, SinnerType.MURDERER);
+        Sinner sinner = new Sinner("bob", "marley", new Date(), sinnerTypes, 3, 3);
+        Sinner sinner2 = new Sinner("bob2", "marley2", new Date(), sinnerTypes, 3, 3);
+
+        SufferingProcess process = new SufferingProcess(MyTools.getStartDateExample(), MyTools.getEndDateExample(), tortureDepartment, sinner);
+//        SufferingProcess processFAILED = new SufferingProcess(MyTools.getEndDateExample(), MyTools.getEndDateExample(), tortureDepartment, sinner);
     }
 
     private static void testXor() {
@@ -57,7 +70,7 @@ public class Main {
         Sinner sinner = new Sinner("bob", "marley", new Date(), sinnerTypes, 3, 3);
         Sinner sinner2 = new Sinner("bob2", "marley2", new Date(), sinnerTypes, 3, 3);
 
-        SufferingProcess process = new SufferingProcess(new Date(), new Date(), tortureDepartment, sinner);
+        SufferingProcess process = new SufferingProcess(MyTools.getStartDateExample(), MyTools.getEndDateExample(), tortureDepartment, sinner);
         sinner.addSufferingProcess(process);
     }
 
