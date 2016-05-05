@@ -1,6 +1,7 @@
 package main.Torturers;
 
 import main.TortureDepartment;
+import main.TorturersTorturingDepartment;
 
 /**
  * Created by tieorange on 28/04/16.
@@ -12,6 +13,11 @@ public class TorturerExploder extends TorturerWithSpikes implements IExploder {
 
     public TorturerExploder(String name, TortureDepartment tortureDepartment, Integer explosionPower) {
         super(name, tortureDepartment);
+        setExplosionPower(explosionPower);
+    }
+
+    public TorturerExploder(String name, TorturersTorturingDepartment torturersTorturingDepartment, int explosionPower) {
+        super(name, torturersTorturingDepartment);
         setExplosionPower(explosionPower);
     }
 

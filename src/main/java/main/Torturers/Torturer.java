@@ -3,6 +3,7 @@ package main.Torturers;
 import main.HellPets.HellPet;
 import main.MAS.ObjectPlus4;
 import main.TortureDepartment;
+import main.TorturersTorturingDepartment;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,16 +21,26 @@ public abstract class Torturer extends ObjectPlus4 {
     private static final String EXTENT_FILE_PATH = "/tmp/extent.torturer";
     private static List<Torturer> extent = new ArrayList<>();
     private String id; // Qualified
-    private TortureDepartment tortureDepartment;
+    private TortureDepartment tortureDepartment; // department #1
+    private TorturersTorturingDepartment torturersTorturingDepartment; // department #2
     private String name;
     private HellPet hellPet;
 
     public Torturer(String name, TortureDepartment tortureDepartment) {
+        this(name);
+        setTortureDepartment(tortureDepartment);
+    }
+
+    public Torturer(String name, TorturersTorturingDepartment torturersTorturingDepartment) {
+        this(name);
+        setTorturersTorturingDepartment(torturersTorturingDepartment);
+    }
+
+    private Torturer(String name) { // to avoid code duplication
         this();
         setName(name);
         UUID uuid = UUID.randomUUID();
         setId(uuid.toString());
-        setTortureDepartment(tortureDepartment);
     }
 
     public Torturer() {
@@ -78,12 +89,31 @@ public abstract class Torturer extends ObjectPlus4 {
     }
 
     public void setTortureDepartment(TortureDepartment tortureDepartment) {
+        if (torturersTorturingDepartment != null) {
+            throw new IllegalArgumentException("another department is already set - allowed only 1 type of department");
+        }
         if (tortureDepartment == null) {
             throw new IllegalArgumentException("tortureDepartment is NULL");
         } else {
             this.tortureDepartment = tortureDepartment;
             tortureDepartment.addTorturer(this);
         }
+    }
+
+    public TorturersTorturingDepartment getTorturersTorturingDepartment() {
+        return torturersTorturingDepartment;
+    }
+
+    public void setTorturersTorturingDepartment(TorturersTorturingDepartment torturersTorturingDepartment) {
+        if (tortureDepartment != null) {
+            throw new IllegalArgumentException("another department is already set - allowed only 1 type of department");
+
+        }
+        if (torturersTorturingDepartment == null) {
+            throw new IllegalArgumentException("torturersTorturingDepartment is NULL");
+        }
+        this.torturersTorturingDepartment = torturersTorturingDepartment;
+        torturersTorturingDepartment.addTorturer(this);
     }
 
     public String getId() {

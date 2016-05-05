@@ -16,7 +16,7 @@ public class Sinner implements ILiar, IMurderer {
     private EnumSet<SinnerType> sinnerTypes;
 
     private Set<Sin> sinsSet = new HashSet<>(); // Composition
-    private SufferingProcess sufferingProcess; // with attribute // TODO: List<main.SufferingProcess> for having a many to many collection (not 1 - *)
+    private List<SufferingProcess> sufferingProcessList = new ArrayList<>(); // with attribute // TODO: List<main.SufferingProcess> for having a many to many collection (not 1 - *)
     @NotNull
     @Size(min = 2, max = 14)
     private String firstName;
@@ -93,22 +93,48 @@ public class Sinner implements ILiar, IMurderer {
         return sinsNames;
     }
 
-    public SufferingProcess getSufferingProcess() {
-        return sufferingProcess;
+    public void addSufferingProcess(SufferingProcess process) {
+        if (process == null) {
+            throw new IllegalArgumentException("process is NULL");
+        }
+        if (!process.getSinner().equals(this)) {
+            throw new IllegalArgumentException("process belongs to another sinner");
+        }
+        sufferingProcessList.add(process);
+
     }
 
-    public void setSufferingProcess(SufferingProcess sufferingProcess) {
-        if (sufferingProcess == null) {
+    public void removeSufferingProcess(SufferingProcess process) {
+        if (process == null) {
+            throw new IllegalArgumentException("process is NULL");
+        }
+        if (!process.getSinner().equals(process)) {
+            throw new IllegalArgumentException("process belongs to another sinner");
+        }
+        sufferingProcessList.remove(process);
+    }
+
+    public List<SufferingProcess> getSufferingProcesses() {
+        return this.sufferingProcessList;
+    }
+
+
+    /*public SufferingProcess getSufferingProcessList() {
+        return sufferingProcessList;
+    }
+
+    public void setSufferingProcessList(SufferingProcess sufferingProcessList) {
+        if (sufferingProcessList == null) {
             throw new IllegalArgumentException("main.SufferingProcess is NULL");
         }
-        if (sufferingProcess.getSinner() != this) {
+        if (sufferingProcessList.getSinner() != this) {
             throw new IllegalArgumentException("main.SufferingProcess sinner is different");
         } else {
-            this.sufferingProcess = sufferingProcess;
-            if (sufferingProcess.getSinner() != this)
-                sufferingProcess.setSinner(this);
+            this.sufferingProcessList = sufferingProcessList;
+            if (sufferingProcessList.getSinner() != this)
+                sufferingProcessList.setSinner(this);
         }
-    }
+    }*/
 
     public String getFirstName() {
         return firstName;
@@ -182,14 +208,14 @@ public class Sinner implements ILiar, IMurderer {
     @Override
     public void Kill() {
         if (sinnerTypes.contains(SinnerType.MURDERER)) {
-            System.out.println("Sinner killed another Sinner"); // TODO: mock
+            System.out.println("Sinner killed another Sinner");
         } else throw new RuntimeException("Sinner is not a Murderer");
     }
 
     @Override
     public void tryToLie() {
         if (sinnerTypes.contains(SinnerType.LIAR)) {
-            System.out.println("Sinner lied to another Sinner"); // TODO: mock
+            System.out.println("Sinner lied to another Sinner");
         } else throw new RuntimeException("Sinner is not a liar");
     }
     //endregion

@@ -36,6 +36,9 @@ public class TortureDepartment extends ObjectPlus4 {
     }
 
     public void addTorturer(Torturer newTorturer) {
+        if (newTorturer.getTorturersTorturingDepartment() != null) {
+            throw new IllegalArgumentException("torturer is already added to TorturersTorturingDepartment");
+        }
         if (newTorturer == null) {
             throw new RuntimeException("main.Torturers is NULL");
         } else {

@@ -66,7 +66,7 @@ public class SufferingProcess {
             throw new IllegalArgumentException("main.Sinners.Sinner is null");
         } else {
             this.sinner = sinner;
-            this.sinner.setSufferingProcess(this);
+            this.sinner.addSufferingProcess(this);
         }
     }
 

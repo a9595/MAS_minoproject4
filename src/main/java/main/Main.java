@@ -36,7 +36,31 @@ public class Main {
 
 //        testSubset_manual();
         testSubset_auto();
+
+        testSufferingProcess();
+
+        testXor();
     }
+
+    private static void testXor() {
+        TortureDepartment tortureDepartment = new TortureDepartment("boiling room");
+        TorturersTorturingDepartment torturersTorturingDepartment = new TorturersTorturingDepartment("hell for torturers");
+
+        TorturerWithSpikes torturerWithSpikesBAD = new TorturerWithSpikes("Mifelos", tortureDepartment);
+//        torturerWithSpikesBAD.setTorturersTorturingDepartment(torturersTorturingDepartment);
+
+    }
+
+    private static void testSufferingProcess() {
+        TortureDepartment tortureDepartment = new TortureDepartment("boiling room");
+        EnumSet<SinnerType> sinnerTypes = EnumSet.of(SinnerType.LIAR, SinnerType.MURDERER);
+        Sinner sinner = new Sinner("bob", "marley", new Date(), sinnerTypes, 3, 3);
+        Sinner sinner2 = new Sinner("bob2", "marley2", new Date(), sinnerTypes, 3, 3);
+
+        SufferingProcess process = new SufferingProcess(new Date(), new Date(), tortureDepartment, sinner);
+        sinner.addSufferingProcess(process);
+    }
+
 
     public static void testSubset_manual() {
         TortureDepartment tortureDepartment = new TortureDepartment("boiling room");
