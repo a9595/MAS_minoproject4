@@ -97,7 +97,9 @@ public class TortureDepartment extends ObjectPlus4 {
         if (punishmentTool != null) {
             if (!punishmentTools.contains(punishmentTool)) {
                 punishmentTools.add(punishmentTool);
-                punishmentTool.setTortureDepartment(this);
+                if (punishmentTool.getTortureDepartment() != this) {
+                    punishmentTool.setTortureDepartment(this);
+                }
             } else {
                 throw new IllegalArgumentException("this punishmentTool is already added");
             }
