@@ -1,5 +1,3 @@
-package test;
-
 import main.TortureDepartment;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -35,6 +33,7 @@ public class TortureDepartmentTest {
         assertEquals(1, constraintViolations.size());
         assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
     }
+
 
 
 }

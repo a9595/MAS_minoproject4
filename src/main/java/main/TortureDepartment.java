@@ -69,11 +69,11 @@ public class TortureDepartment extends ObjectPlus4 {
             throw new IllegalArgumentException("main.SufferingProcess torture department is different");
         }
 
-        if (!this.sufferingProcesses.contains(sufferingProcess)) {
-            sufferingProcesses.add(sufferingProcess);
-        } else {
-            throw new IllegalArgumentException("This main.SufferingProcess is already added");
-        }
+//        if (!this.sufferingProcesses.contains(sufferingProcess)) {
+        sufferingProcesses.add(sufferingProcess);
+//        } else {
+//            throw new IllegalArgumentException("This main.SufferingProcess is already added");
+//        }
     }
 
     public String getName() {

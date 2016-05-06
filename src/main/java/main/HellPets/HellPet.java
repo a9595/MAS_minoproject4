@@ -110,6 +110,9 @@ public class HellPet implements IFlying, IJumping {
     public void setFlyingSpeed(Integer flyingSpeed) {
         if (HellPetType.FLYING.equals(hellPetType)) {
             if (flyingSpeed != null && flyingSpeed > 0) {
+                if (flyingSpeed > 100 && !this.getColor().equals(HellPetColor.RED)) {
+                    throw new IllegalArgumentException("Such a high speed (>100) is allowed only for RED color HellPet");
+                }
                 this.flyingSpeed = flyingSpeed;
             } else throw new IllegalArgumentException("flyingSpeed should be > 0 and NOT NULL");
         } else throw new IllegalArgumentException("HellPet is not a flying pet");
